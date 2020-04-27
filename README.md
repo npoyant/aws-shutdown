@@ -1,4 +1,4 @@
-# tssc-infra (PRIVATE])
+# tssc-infra (PRIVATE)
 TSSC Infrastrcture.
 
 > PRIVATE REPO
