@@ -51,7 +51,7 @@ oc process -f https://raw.githubusercontent.com/redhat-cop/openshift-templates/m
 ```
 
 ### Deploy Artifactory
-Utiling helm carts, deploy artifactory to OpenShift
+Utilizing helm carts, deploy artifactory to OpenShift
 ```
 helm upgrade --install artifactory-oss --set artifactory.nginx.enabled=false --set artifactory.postgresql.postgresqlPassword=artifactory --namespace artifactory jfrog/artifactory-oss
 ```
