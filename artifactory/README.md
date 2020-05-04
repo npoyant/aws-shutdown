@@ -1,5 +1,5 @@
 # Artifactory
-TSSC Artifactory
+TSSC Artifactory Deployment Documentation
 
 ## Deployment
 
