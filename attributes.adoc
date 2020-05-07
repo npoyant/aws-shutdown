@@ -1,0 +1,11 @@
+:imagesdir: images
+:toc: left
+:toclevels: 3
+:numbered:
+:sectanchors:
+:sectlinks:
+
+:ProjectName: Trusted{nbsp}Software{nbsp}Supply{nbsp}Chain{nbsp}Infrastructure
+:ProjectShortName: TSSC Infrastructure
+:ProjectNameID: tssc_infra
+:ProjectVersion: 1.0

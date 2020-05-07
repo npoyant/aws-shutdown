@@ -1,0 +1,8 @@
+include::attributes.adoc[]
+
+{basebackend}
+
+= Documentation for {ProjectName} ({ProjectShortName})
+:context: {ProjectNameID}
+
+include::docs/mvp.adoc[leveloffset=+1]

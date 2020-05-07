@@ -1,0 +1,19 @@
+//ifdef::env-github[]
+:imagesdir: ../images
+:ProjectName: Trusted{nbsp}Software{nbsp}Supply{nbsp}Chain{nbsp}Infrastructure
+:ProjectShortName: TSSC Infrastructure
+//endif::[]
+
+= {ProjectName} ({ProjectShortName})
+
+{ProjectName} ({ProjectShortName}) defines how the TSSC infra gets deployed. In the begining this will just be hand jammed runbook style information and configuration files but as TISC starts to have outputs then this project will become the configuraiton which feeds into the TISC automation.
+
+== Installation Guides
+// If we ever choose to publish this via asciidoctor, change the links below to includes, e.g.
+// include::artifactory/install.adoc[leveloffset=+2]
+
+* link:docs/artifactory/install.adoc[Artifactory]
+
+== Development Practices
+
+* link:docs/dev_guide/rhpds.adoc[Red Hat Product Demo System (RHPDS)]
