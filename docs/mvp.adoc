@@ -15,6 +15,7 @@
 
 * link:docs/artifactory/install.adoc[Artifactory]
 * link:docs/tekton/install.adoc[Tekton]
+
 == Development Practices
 
 * link:docs/dev_guide/rhpds.adoc[Red Hat Product Demo System (RHPDS)]
