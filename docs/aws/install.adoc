@@ -1,0 +1,3 @@
+= AWS How To's
+
+This folder is to host any adhoc AWS configurations that were put into place to support this effort.
