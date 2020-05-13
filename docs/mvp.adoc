@@ -11,6 +11,7 @@
 == Installation Guides
 // If we ever choose to publish this via asciidoctor, change the links below to includes, e.g.
 // include::artifactory/install.adoc[leveloffset=+2]
+// include::tekton/install.adoc[leveloffset=+2]
 
 * link:docs/artifactory/install.adoc[Artifactory]
 
