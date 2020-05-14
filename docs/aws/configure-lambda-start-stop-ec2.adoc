@@ -164,7 +164,7 @@ Under Event Source, choose Schedule
 
 Select Cron Expression
 
-Input:  0 2 * * ? *
+Input:  `0 2 * * ? *`
 
 Under Targets, choose Add target.
 
@@ -195,7 +195,7 @@ Under Event Source, choose Schedule
 
 Select Cron Expression
 
-Input:  0 12 * * ? *
+Input:  `0 12 * * ? *`
 
 Under Targets, choose Add target.
 
