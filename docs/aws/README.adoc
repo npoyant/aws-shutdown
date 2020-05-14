@@ -2,5 +2,5 @@
 
 This folder is to host any adhoc AWS configurations that were put into place to support this effort.
 
-* link:docs/aws/configure-lambda-start-stop-ec2.adoc[AWS Lambda Automated Start/Stop EC2]
+* link:configure-lambda-start-stop-ec2.adoc[AWS Lambda Automated Start/Stop EC2]
 
