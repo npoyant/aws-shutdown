@@ -12,9 +12,13 @@ Select Region: US West (Oregon) us-west-2
 === Create IAM Policy
 
 Select “Services” -> “IAM”
+
 Select “Policies” on left menu
+
 Select “Create Policy” blue button
+
 Select “JSON” tab
+
 Insert code
 ```
 {
@@ -41,7 +45,9 @@ Insert code
 }
 ```
 Select “Review Policy” blue button
+
 In Name field:  IAM-Policy-Start-Stop-Lambda-Function 
+
 Select “Create Policy” blue button
 
 
@@ -49,29 +55,48 @@ Select “Create Policy” blue button
 
 
 Select “Services” -> “IAM”
+
 Select “Roles” on left menu
+
 Select “Create role” blue button
+
 Select "AWS service" box
+
 Select "Lambda" in the "Choose a use case" section Select "Next: Permissions"
+
 Select "IAM-Policy-Start-Stop-Lambda-Function"
+
 Select "Next: Tags" blue button
+
 Select "Next: Review" blue button
+
 Input Role Naem:  "IAM-Role-Lamdba"
+
 Select "Create role" blue button
 
 
 === Create Lambda functions that stop your EC2 instances
 
 Select "Services" -> "Lambda"
+
 Select "Functions" on left menu
+
 Select "Create function" orange button
+
 Select "Author from scratch"
+
 Input Function Name: "Lambda-Function-Stop-EC2"
+
 Select "Python 3.7" Runtime
+
 Expand "Choose or create an execution role"
+
 Select "Use an existing role"
+
 Input Existing Role:  "IAM-Role-Lamdba"
+
 Select "Creation Function" orange button
+
 Insert Code in "lambda function" editor
 ```
 import boto3
@@ -85,21 +110,32 @@ def lambda_handler(event, context):
     print('stopped your instances: ' + str(instances))
 ```
 Under Basic settings, set Timeout to 30 seconds.
+
 Select "Save" orange button
 
 
 === Create Lambda functions that start your EC2 instances
 
 Select "Services" -> "Lambda"
+
 Select "Functions" on left menu
+
 Select "Create function" orange button
+
 Select "Author from scratch"
+
 Input Function Name: "Lambda-Function-Start-EC2"
+
 Select "Python 3.7" Runtime
+
 Expand "Choose or create an execution role"
+
 Select "Use an existing role"
+
 Input Existing Role:  "IAM-Role-Lamdba"
+
 Select "Creation Function" orange button
+
 Insert Code in "lambda function" editor
 ```
 import boto3
@@ -119,17 +155,29 @@ Select "Save" orange button
 === Create rules that trigger your Lambda stop function
 
 Select "Services" -> "Cloud Watch"
+
 In the left navigation pane, under Events, choose Rules
+
 Choose Create rule
+
 Under Event Source, choose Schedule
+
 Select Cron Expression
+
 Input:  0 2 * * ? *
+
 Under Targets, choose Add target.
+
 Choose Lambda function
+
 For Function, select "Lamba-Function-Stop-EC2"
+
 Select "Configure details" blue button
+
 Under Rule definition, Input Name:  "CW-Stop-EC2"
+
 Select State: "Enabled"
+
 Select "Create Rule" blue button
 
 
@@ -138,15 +186,27 @@ Select "Create Rule" blue button
 === Create rules that trigger your Lambda stop function
 
 Select "Services" -> "Cloud Watch"
+
 In the left navigation pane, under Events, choose Rules
+
 Choose Create rule
+
 Under Event Source, choose Schedule
+
 Select Cron Expression
+
 Input:  0 12 * * ? *
+
 Under Targets, choose Add target.
+
 Choose Lambda function
+
 For Function, select "Lamba-Function-Start-EC2"
+
 Select "Configure details" blue button
+
 Under Rule definition, Input Name:  "CW-Start-EC2"
+
 Select State: "Enabled"
+
 Select "Create Rule" blue button
