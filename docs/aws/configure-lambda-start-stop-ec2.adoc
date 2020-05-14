@@ -11,13 +11,10 @@ Select Region: US West (Oregon) us-west-2
 
 === Create IAM Policy
 
-Select “Services” -> “IAM”
-
-Select “Policies” on left menu
-
-Select “Create Policy” blue button
-
-Select “JSON” tab
+* Select “Services” -> “IAM”
+* Select “Policies” on left menu
+* Select “Create Policy” blue button
+* Select “JSON” tab
 
 Insert code
 ```
