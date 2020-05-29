@@ -1,0 +1,32 @@
+= Jenkins
+
+== Prerequisites
+
+=== Recommended
+The installation below will leverage OpenShift OAuth, and therefore it is recommended, if you wish to leverage OpenShift integrated Keycloak SSO, that Keycloak is deployed before performing these steps.
+
+== Deployment from OpenShift Console
+
+=== Create Jenkins Project
+
+From the OpenShift Console click the "Project" dropdown and then select "Create Project". 
+
+In the popup type jenkins in the "Name" field and then select "Create".
+
+=== Deploy Jenkins
+
+Jenkins is provided as an add-on on top of OpenShift that can be installed via the OpenShift 4.x "Catalog."
+
+Go to **+Add > From Catalog** in the Web Console. You can see the list of available services for OpenShift provided by Red Hat as well as a community of partners and open-source projects.
+
+In the search bar where it says `Filter by keyword...`, type Jenkins to find the **Jenkins**. Note it is important that, if persistent storage is not required, one can use the **Jenkins (Ephemeral)** option.
+
+Click on **Jenkins**, and then **Instantiate Template**:
+
+Leave the default settings except for:
+
+* Namespace: Set to `jenkins` can be anything 
+* Memory Limit: Set to `4Gi`
+* Volume Capacity: Set to at least `20Gi`
+
+You can confirm the following by checking the jenkins pods with `Running` state in the installation namespace. If so, openshift-pielines have been installed on your cluster.
