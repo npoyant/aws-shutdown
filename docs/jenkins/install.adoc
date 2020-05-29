@@ -24,6 +24,7 @@ In the search bar where it says `Filter by keyword...`, type Jenkins to find the
 Click on **Jenkins**, and then **Instantiate Template**:
 
 Leave the default settings except for:
+
 * Namespace: Set to `jenkins` can be anything 
 * Memory Limit: Set to `4Gi`
 * Volume Capacity: Set to at least `20Gi`
