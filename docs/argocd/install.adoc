@@ -1,0 +1,54 @@
+= ArgoCD
+
+== Prerequisites
+
+=== Required
+The installation below will leverage Keycloak SSO, and therefore it is required that Keycloak is deployed before performing these steps and an `argocd` client is set up and configured to be `confidential`.
+
+== Deployment from OpenShift Console
+
+=== Create ArgoCD Project
+
+From the OpenShift Console click the "Project" dropdown and then select "Create Project". 
+
+In the popup type `argocd` in the "Name" field and then select "Create".
+
+=== Deploy ArgoCD
+
+ArgoCD is provided as an add-on on top of OpenShift that can be installed via the OpenShift 4.x "OperatorHub"
+
+Go to **Operators > OperatorHub** in the Web Console. You can see the list of available operators for OpenShift provided by Red Hat as well as a community of partners and open-source projects.
+
+In the search bar where it says `Filter by keyword...`, type ArgoCD to find the **Argo CD**. Note these instructions do not support the installation of the **Argo CD Operator (Helm)** Operator.
+
+Click on **Argo CD**, then in the pop-up click **Continue**, and then click **Install**:
+
+Leave the default settings and click on **Subscribe** in order to subscribe to the installation and update channels.
+
+After clicking **Subscribe**, you will be taken to the **Installed Operators** page. If you do not see the **Argo CD**, simply wait a moment while the **Argo CD** finishes installation
+
+Next navigate to **Administration > Custom Resource Definitions** and in the search bar where it says `Filter by name...` type ArgoCD and then click **ArgoCD**
+
+Once there, navigate to the **Instances** tab and click **Create ArgoCD**
+
+When the YAML pane shows, paste the following YAML inside the pane:
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  oidcConfig: |
+    name: KeyCloak
+    issuer: https://keycloak-keycloak.apps.tssc.rht-set.com/auth/realms/master
+    clientID: argocd
+    clientSecret: <client-secret-for-confidential>
+  server:
+    route: true
+```
+
+Being careful to replace the Keycloak client secret for the `argocd` client with the correct secret.
+
+Then after all this is done click **Save** and ArgoCD will be deployed.
