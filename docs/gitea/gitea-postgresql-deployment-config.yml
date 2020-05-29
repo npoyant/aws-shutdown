@@ -1,0 +1,84 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: gitea-postgresql
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    name: gitea-postgresql
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: gitea-postgresql
+      name: gitea-postgresql
+    spec:
+      containers:
+      - env:
+        - name: POSTGRESQL_USER
+          value: gitea
+        - name: POSTGRESQL_PASSWORD
+          value: gitea
+        - name: POSTGRESQL_DATABASE
+          value: gitea
+        - name: POSTGRESQL_MAX_CONNECTIONS
+          value: "100"
+        - name: POSTGRESQL_SHARED_BUFFERS
+          value: 12MB
+        - name: POSTGRESQL_ADMIN_PASSWORD
+          value: LN80gc83
+        image: registry.redhat.io/rhel8/postgresql-96 
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 5432
+          timeoutSeconds: 1
+        name: postgresql
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -i
+            - -c
+            - psql -h 127.0.0.1 -U ${POSTGRESQL_USER} -q -d ${POSTGRESQL_DATABASE}
+              -c 'SELECT 1'
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/pgsql/data
+          name: gitea-postgres-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: gitea
+      serviceAccountName: gitea
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: gitea-postgres-data
+        persistentVolumeClaim:
+          claimName: gitea-postgres-data
+  test: false
+  triggers:
+  - type: ConfigChange

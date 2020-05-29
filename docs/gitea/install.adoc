@@ -1,0 +1,52 @@
+= Gitea
+TSSC Gitea Deployment Documentation
+
+== Deployment
+
+
+=== Install OpenShift Client 
+If you do not have the oc client installed, refer to the following documentation
+
+https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html=installing-the-cli
+
+=== Login to OpenShift
+Login to OCP w/ an account that has cluster admin level permissions
+
+```
+oc login
+```
+
+
+=== Create Artifactory OpenShift Project
+Create an OpenShift Project for Gitea (Can be configured to any name)
+
+```
+oc new-project gitea
+```
+
+=== Clone this Repository
+To clone this repository you must first have git installed. to install git follow the instructions https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[here]. 
+
+Once git is installed, clone the repo using either SSH:
+
+```
+git clone git@github.com:rhtconsulting/tssc-infra.git
+```
+
+or HTTPS:
+
+```
+git clone https://github.com/rhtconsulting/tssc-infra.git
+```
+
+=== Deploy Gitea
+
+```
+cd tssc-infra/docs/gitea
+```
+```
+oc create -R -f ./ 
+```
+
+=== Create Initial Admin User
+To login to Gitea it is first required that an admin user is created. This can be done by following the deployed Gitea URL and clicking the "Register" button in the top right corner and then enter a username, email address, and password. 
