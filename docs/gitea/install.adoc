@@ -17,7 +17,7 @@ oc login
 ```
 
 
-=== Create Artifactory OpenShift Project
+=== Create Gitea OpenShift Project
 Create an OpenShift Project for Gitea (Can be configured to any name)
 
 ```
