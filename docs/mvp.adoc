@@ -14,8 +14,12 @@
 // include::tekton/install.adoc[leveloffset=+2]
 // include::aws/configure-lambda-start-stop-ec2.adoc[leveloffset=+2]
 
+* link:docs/argocd/README.adoc[Argocd]
 * link:docs/artifactory/README.adoc[Artifactory]
 * link:docs/aws/README.adoc[AWS]
+* link:docs/gitea/README.adoc[Gitea]
+* link:docs/jenkins/README.adoc[Jenkins]
+* link:docs/sonarqube/README.adoc[Sonarqube]
 * link:docs/tekton/install.adoc[Tekton]
 
 == Development Practices
