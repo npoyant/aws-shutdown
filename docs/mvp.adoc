@@ -8,12 +8,14 @@
 
 {ProjectName} ({ProjectShortName}) defines how the TSSC infra gets deployed. In the begining this will just be hand jammed runbook style information and configuration files but as TISC starts to have outputs then this project will become the configuraiton which feeds into the TISC automation.
 
-== Installation Guides
+== Installation & Configuration Guides
 // If we ever choose to publish this via asciidoctor, change the links below to includes, e.g.
 // include::artifactory/install.adoc[leveloffset=+2]
 // include::tekton/install.adoc[leveloffset=+2]
+// include::aws/configure-lambda-start-stop-ec2.adoc[leveloffset=+2]
 
-* link:docs/artifactory/install.adoc[Artifactory]
+* link:docs/artifactory/README.adoc[Artifactory]
+* link:docs/aws/README.adoc[AWS]
 * link:docs/tekton/install.adoc[Tekton]
 
 == Development Practices
