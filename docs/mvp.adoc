@@ -18,6 +18,7 @@
 * link:docs/artifactory/README.adoc[Artifactory]
 * link:docs/aws/README.adoc[AWS]
 * link:docs/gitea/README.adoc[Gitea]
+* link:docs/idm/README.adoc[IdM]
 * link:docs/jenkins/README.adoc[Jenkins]
 * link:docs/sonarqube/README.adoc[Sonarqube]
 * link:docs/tekton/install.adoc[Tekton]
