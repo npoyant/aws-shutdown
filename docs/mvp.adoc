@@ -22,7 +22,7 @@
 * link:docs/keycloak/README.adoc[Keycloak]
 * link:docs/jenkins/README.adoc[Jenkins]
 * link:docs/sonarqube/README.adoc[Sonarqube]
-* link:docs/tekton/install.adoc[Tekton]
+* link:docs/tekton/README.adoc[Tekton]
 
 == Development Practices
 
