@@ -2,4 +2,27 @@
 
 This folder is to host any deployment and/or configurations that were put into place to support this effort.
 
+== Install
+
 * link:install.adoc[Deploy Gitea]
+
+== Configure External SSH
+
+=== Create Exteranl Load Balancer (cloud intigrated OCP)
+1. `oc create -f gitea-servive-ext-lb.yml`
+
+=== Create Vanity DNS
+
+==== AWS
+1. log into aws
+2. Route53
+3. Hosted Zones
+4. Public Zone (rht-set.com.)
+5. Create Record Set
+   * name: gitea.tssc (.rht-set.com.)
+   * Type: A - IPv4 address
+   * Alias: Yes
+   * Alia Target: Find the ELB that matches the ELB hosting the LoadBalancer FQDN
+   * Routing Policy: Simple
+   * Evaluate Target Health: No
+6. Save Record Set
