@@ -11,7 +11,7 @@ This folder is to host any deployment and/or configurations that were put into p
 === Create Exteranl Load Balancer (cloud intigrated OCP)
 1. `oc create -f gitea-service-ext-lb.yml`
 
-=== Create Vanity DNS
+=== Create Vanity FQDN
 
 ==== AWS
 1. log into aws
@@ -26,3 +26,23 @@ This folder is to host any deployment and/or configurations that were put into p
    * Routing Policy: Simple
    * Evaluate Target Health: No
 6. Save Record Set
+
+=== Update Keyclock
+1. Log into keyclock
+2. Clients
+3. Gitea
+4. Valid Redirect URIs
+5. Add a new entry for the new vanity FQDN (aka, http://gitea.tssc.rht-set.com/*)
+
+
+=== Update Gitea Config
+
+1. edit the gitea config map with the new FQDN
+   1. `oc edit configmap gitea-config -n gitea`
+   2. update the following parameters
+      * ROOT_URL: update to match vanity fqdn created in the Create Vanity FQDN step (aka, `http://gitea.tssc.rht-set.com`)
+      * SSH_DOMAIN: update to match vanity fqdn created in the Create Vanity FQDN step (aka, `gitea.tssc.rht-set.com`)
+      * DOMAIN: update to match vanity fqdn created in the Create Vanity FQDN step (aka, `gitea.tssc.rht-set.com`)
+   3. save
+2. re-deploy gitea to pick up the configmap change
+   * `oc rollout latest gitea -n gitea`
