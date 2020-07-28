@@ -5,7 +5,7 @@
 |IdM URL
 |Network
 
-|https://idm-1.tssc.rht-set.com/ipa/ui,public
+|https://idm-1.tssc.rht-set.com/ipa/ui| public
 |https://idm-2.tssc.rht-set.com/ipa/ui,public
 |https://idm-3.tssc.rht-set.com/ipa/ui,internal
 |https://idm-4.tssc.rht-set.com/ipa/ui,internal
