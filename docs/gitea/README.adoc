@@ -8,7 +8,7 @@ This folder is to host any deployment and/or configurations that were put into p
 
 == Configure External SSH
 
-=== Create Exteranl Load Balancer (cloud intigrated OCP)
+=== Create External Load Balancer (cloud intigrated OCP)
 1. `oc create -f gitea-service-ext-lb.yml`
 
 === Create Vanity FQDN

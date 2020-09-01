@@ -23,6 +23,7 @@
 * link:docs/jenkins/README.adoc[Jenkins]
 * link:docs/sonarqube/README.adoc[Sonarqube]
 * link:docs/tekton/README.adoc[Tekton]
+* link:docs/gitea_jenkins_integration/README.adoc[Gitea integration with Jenkins]
 
 == Development Practices
 
