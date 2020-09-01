@@ -1,0 +1,97 @@
+= Keycloak and OpenShift Integration for Group Syncing (IdM User Federation)
+
+== Prerequisites
+* LDAP IdM User Federation is configured
+* There exist groups to be synced with OpenShift
+
+== Integration
+
+=== Access Keycloak UI Admin Console
+
+1. Open a web browser and enter the following URL: `https://keycloak-keycloak.apps.tssc.rht-set.com/auth/admin/`
+
+2.  Enter Admin Username: `keycloak`
+3. Enter Admin Password: `<password>`
+
+=== Configure User Federation
+
+1. Select "User Federation" on the left menu
+2. Choose the previously configured provider
+3. Click on the "Mappers" tab
+4. Click the "Create" button
+5. Enter name "groups" in the "Name" field
+6. In the "Mapper Type" dropdown select: `group-ldap-mapper`
+7. In the next screen, enter the following fields:
+** LDAP Groups DN: `cn=groups,cn=accounts,dc=tssc,dc=rht-set,dc=com`
+** Group Name LDAP Attribute: `cn`
+** Group Object Classes: `groupOfNames`
+** *NOTE:* (the rest of the fields should be filled in by default)
+
+8. Click "Save"
+9. Click the "Sync LDAP Groups To Keycloak" button
+
+== OpenShift Group Sync (from Keycloak)
+
+=== Access the OpenShift Console
+1. Open a web browser and enter the following URL: `https://console-openshift-console.apps.tssc.rht-set.com`
+2. Enter an Cluster Admin Username: `<username>`
+3. Enter an Cluster Admin Password: `<password>`
+
+=== Deploy Group Sync Operator
+1. Click the "Projects" tab of the "Home" dropdown
+2. Click the "Create Project" button
+3. In the "Name" field of the modal type: `group-sync-operator`
+4. Now click the "OperatorHub" tab of the "Operators" dropdown
+5. In the filter search bar type: "group-sync" and click the item named "Group Sync Operator"
+6. Click the "Install" button on the newly opened modal
+7. Install the operator to a "Specific Namespace" of `group-sync-operator` and leave the rest of the values to default
+8. Click the "Subscribe" button
+
+=== Create Keycloak Credentials Secret
+1. In the "Secrets" tab of the "Workloads" dropdown (and in the group-snyc-operator project), click "Create" and "Key/Value Secret" in the dropdown
+2. In the "Secret Name" field of the form, type: "keycloak-group-sync"
+3. In the first "Key" field type: "username"
+4. In the first "Value" text area type the keycloak admin username
+5. Select "+ Add Key/Value"
+6. In the new (second) "Key" field type: "password"
+7. In the new (second) "Value" text area type the keycloak admin password
+8. Click the "Create" button
+
+=== Create GroupSync
+1. Under the "Installed Operators" tab of the "Operators" dropdown, select the "Group Sync Operator"
+2. Under the "Provided APIs" title select "+ Create Instance" on the "Group Sync Operator" tile
+3. Under spec enter following values:
+```
+providers:
+  - keycloak:
+      credentialsSecret:
+        name: keycloak-group-sync
+        namespace: group-sync-operator
+      groups:
+        - ocp4_admins
+        - ocp4_selfprovisioners
+      loginRealm: master
+      realm: master
+      scope: sub
+      url: 'https://keycloak-keycloak.apps.tssc.rht-set.com'
+    name: keycloak
+schedule: '*/5 * * * *'
+```
+*Explanation*: this creates a keycloak sync for two specific OpenShift groups (`ocp4_admins` and `ocp4_selfprovisioners`) in the master keycloak realm. The keycloak provider points to our publicly accessible keycloak
+URL and is scheduled to run every 5 minutes (the `schedule` parameter uses cron syntax). This provider references our previously created keycloak credentials secret in the `credentialsSecret` section.
+
+== Apply Cluster RBAC to Newly Synced Groups
+
+=== Create RoleBinding for Group
+1. Click the "Role Bindings" tab in the "User Management" dropdown
+2. Click the "Create Binding" button
+3. In the form fill out the following fields with the corresponding values:
+
+**  Binding Type: "Cluster-wide Role Binding (ClusterRoleBinding)"
+** Role Binding:
+*** Name: <ocp-group-name>
+** Role Name: <ocp-applicable-cluster-role>
+** Subject: "Group"
+** Subject Name: <ocp-group-name>
+
+4. Click the "Create" button
