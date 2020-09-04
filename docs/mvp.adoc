@@ -24,6 +24,7 @@
 * link:docs/sonarqube/README.adoc[Sonarqube]
 * link:docs/tekton/README.adoc[Tekton]
 * link:docs/gitea_jenkins_integration/README.adoc[Gitea integration with Jenkins]
+* link:docs/gitea_tekton_integration_info/README.adoc[Gitea integration with Tekton - Informational]
 
 == Development Practices
 
