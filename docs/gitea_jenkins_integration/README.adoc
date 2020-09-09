@@ -1,5 +1,9 @@
 == Pre-Requisites
 
+Update with:
+ - Save webhook -> Add webhook
+    - No Test delivery function until after saving and revisiting page
+
 . Jenkins and Gitea are installed. Refer to their respective installation guides within this repository:
 +
    * link:../Gitea/install.adoc[Deploy Gitea]
@@ -25,7 +29,7 @@ The following sections describe how to integrate Jenkins and Gitea such that eve
 image::images/gitea_server.png[Add Gitea server]
 +
 . Create an access token (and copy / save the value) in Gitea for the jenkins account via the Gitea UI: **Settings -> Applications -> Generate New Token**. Make sure it has access to the organization / repository containing the source code.
-. From the main screen in jenkins select **New Item** of type **Giteagitea_webhook_test.png Organization**
+. From the main screen in jenkins select **New Item** of type **Gitea Organization**
 +
    * Set the name field to a descriptive name, e.g. *TSSC Gitea*
    * Set the owner to the name of the organization in Gitea, e.g., *tssc-references*. This **MUST** match the organization name in Gitea exactly.
@@ -35,7 +39,7 @@ image::images/gitea_server.png[Add Gitea server]
 +
 image::images/gitea_org_item.png[Create Gitea Organization in Jenkins]
 +
-. Save the Gitea organization item. It will automatically discover all branches and initiate pipelines. You can manually stop the pipelines if desired
+. Save the Gitea organization item. It will automatically discover all branches and initiate pipelines. You can manually stop the pipelines if desired.
 +
 image::images/gitea_org_repos.png[Gitea Organization Repos]
 +
@@ -43,17 +47,18 @@ image::images/gitea_org_repo_branches.png[Gitea Repo Branches]
 
 == Create webhook in Gitea
 . Log in to Gitea and navigate to the code repository. Navigate to **Settings -> Webhooks**
-+ Fill in the parameters. The target url should point to the http://*your-jenkins-instance-address*/Gitea-webhook/post. See example below. Set the appopriate events that should trigger a hook
++ Fill in the parameters. The target url should point to the http://*your-jenkins-instance-address*/gitea-webhook/post. For "Trigger On", select "Custom Events..."  and "Push" and "Pull Request". See the example below.
 +
 image::images/gitea_webhook_config.png[Gitea Webhook Configuration]
 +
-. Save the webhook and click the **Test Delivery** button to verify the hook is successfully sent to jenkins. Click the successful test to view the contents. Verify the Gitea url referenced in the payload matches the url set as an alias within jenkins in the previous section.
+. Save the webhook by selecting "Add Webhook".
+. Select the webhook you just created and click the **Test Delivery** button to verify the hook is successfully sent to Jenkins. Click the successful test to view the contents. Verify the Gitea url referenced in the payload matches the url set as an alias within Jenkins in the previous section.
 +
 image::images/gitea_webhook_test.png[Gitea Webhook Test]
 +
-. Try creating a new branch and verify it is added to jenkins and a corresponding pipeline is created.
+. Try creating a new branch and verify it is added to Jenkins and a corresponding pipeline is created.
 +
 . If the pipeline is not automatically created for the branch and started:
 +
-   * Verify the **alias** set for the Gitea server matches the public Gitea url
-   * Verify the **owner** set for the Gitea organization in jenkins exactly matches the organization name in Gitea
+   * Verify the **alias** set for the Gitea server matches the public Gitea URL.
+   * Verify the **owner** set for the Gitea organization in Jenkins exactly matches the organization name in Gitea.
