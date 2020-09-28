@@ -145,36 +145,36 @@ TBD
 1. log into the Jenkins UI
 2. `New Item`
   * Name: GITEA_ORG_NAME
-    - this should be whatever the org name is in gitea, for tssc intgegration enviornment this is `tssc-references`
+  ** this should be whatever the org name is in gitea, for tssc intgegration enviornment this is `tssc-references`
   * Gitea Organization
 3. Click - OK
 4. Configure the Gitea Org Item
   * Server: Select the name that was created in the `Connect Jenkins to Gitea` step
   * Credentials: Add then select
-    - Domain: whatever
-    - Kind: Gitea Personal Access Token
-    - Token: ${GITEA_JENKINS_SA_TOKEN}
-      * from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
-    - ID: ${GITEA_SA_NAME}
-      * from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
+  ** Domain: whatever
+  ** Kind: Gitea Personal Access Token
+  ** Token: ${GITEA_JENKINS_SA_TOKEN}
+  *** from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
+  ** ID: ${GITEA_SA_NAME}
+  *** from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
   * Owner: ${GITEA_ORG_NAME}
-    - this needs to match the org name in gitea that the service account was given access to that you want to scan projects of
+  ** this needs to match the org name in gitea that the service account was given access to that you want to scan projects of
   * Behaviors
-    - Discovery Branches
-      * Strategy: TBD
-        - Currently we are using `All Branches` but that was just a guess, we need to do some expirmentation to figure out what the right setting here is.
-        - currently with all branches we get duplicate pipelines for both the branch and PR for branch, need to try and get it down so that there isn't duplication and decide what the default opinion is
-        - thinking that maybe `Only branches thgat are also files as PRs` may make snese but then you run into problem that you can't create a PR for a branch that is the same as the branch (`main`) you are merging into, so then you get a chicken/egg problem of getting a dev environment when you first branch
-    - Discover pull requests from origion
-      * Strategy: `The current pull reuqest revision`
-    - Discover pull requests from forks
-      * Strategy: `The current pull reuqest revision`
-   - Add
-     * `Check out to matching local branch`
+  ** Discovery Branches
+  *** Strategy: TBD
+  **** Currently we are using `All Branches` but that was just a guess, we need to do some expirmentation to figure out what the right setting here is.
+  **** currently with all branches we get duplicate pipelines for both the branch and PR for branch, need to try and get it down so that there isn't duplication and decide what the default opinion is
+  **** thinking that maybe `Only branches thgat are also files as PRs` may make snese but then you run into problem that you can't create a PR for a branch that is the same as the branch (`main`) you are merging into, so then you get a chicken/egg problem of getting a dev environment when you first branch
+  ** Discover pull requests from origion
+  *** Strategy: `The current pull reuqest revision`
+  ** Discover pull requests from forks
+  *** Strategy: `The current pull reuqest revision`
+  ** Add
+  *** `Check out to matching local branch`
   * Project Recognizers
-    - Pipeline Jenkinsfile
-      * Script Path: `cicd/Jenkins/Jenkinsfile`
-        - NOTE: this is what the TSSC integration reference prjoejcts currently use, update to be wherever your apps store Jenkinsfiles
+  ** Pipeline Jenkinsfile
+  *** Script Path: `cicd/Jenkins/Jenkinsfile`
+  **** NOTE: this is what the TSSC integration reference prjoejcts currently use, update to be wherever your apps store Jenkinsfiles
   * Save
 
 ===== Created Jenkins Crednetial with SOPS decryption information
