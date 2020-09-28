@@ -136,7 +136,7 @@ TBD
   * Name: TSSC Gitea (Or whatever)
   * Server URL: http://gitea.gitea.svc.cluster.local:3000
     - NOTE: have tried using public route but had troubles in TSSC infra environment, that may just be a problem with the certs or something in that environment, but hitting the service directly seems to work, but in the TSSC infra environment currently no NetworkPolicies are in place. With a "sane" NetworkPolicy structure the jenkins project woulnd't be able to directly hit the gitea service, so this is an issue that has to be sorted in a more "sanly" built infra.
-  * Advanced: Alias URL: http://gitea.gitea.svc.cluster.local:3000
+  * Advanced: Alias URL: http://gitea.tssc.rht-set.com/
     - VERIFY: that below Server URL Jenkins shows `Gitea Versin: *.*.*` and not an error
     - if specifying the non public URL in the `Server URL` then be sure to use the actual public URL here
 
