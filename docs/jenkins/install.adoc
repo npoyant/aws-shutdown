@@ -96,7 +96,7 @@ TODO
 ====== OpenID Identity Provider Service Account
 TBD
 
-===== Manual Local Service Account
+====== Manual Local Service Account
 1. Log into Gitea as administrator
 2. Upper Right Drop Down -> Site Administration
 3. User Accounts
@@ -110,14 +110,11 @@ TBD
 6. Edit the organization to scan for projects to run in Jenkins
   - in tssc integration this is the `tssc-references` org
 7. New Team
-  * Team Name: service-accounts
+  * Team Name: service-accounts-admins
   * Repository acess: All repositories
-  * Permissions: Read Access
-  * Allow Access to Repository Sections
-    - Code
-    - Issues
-    - Pull Requests
-    - Releases
+  * Permissions: Administrator Access
+  ** *NOTE 1*: need admin so the Jenkins Gitea plugin can automatically create commit hooks on repositories. If your organization really doesn't want to have a service account with admin access then you can instead add this account to a team with only `Read Access`
+  ** *NOTE 2*: this can be, but is recomended not to be the same user that applciation TSSC pipelines use to interact with git, such as to push tags or update Helm config repositories, that should be a seperate service account created in a `service-accounts-write` organization with those specific permissions.
 8. Add Team Member
   * User created in step 4
 9. Logout of Gitea as administrator
@@ -149,32 +146,36 @@ TBD
   * Gitea Organization
 3. Click - OK
 4. Configure the Gitea Org Item
-  * Server: Select the name that was created in the `Connect Jenkins to Gitea` step
-  * Credentials: Add then select
-  ** Domain: whatever
-  ** Kind: Gitea Personal Access Token
-  ** Token: ${GITEA_JENKINS_SA_TOKEN}
-  *** from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
-  ** ID: ${GITEA_SA_NAME}
-  *** from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
-  * Owner: ${GITEA_ORG_NAME}
-  ** this needs to match the org name in gitea that the service account was given access to that you want to scan projects of
-  * Behaviors
-  ** Discovery Branches
-  *** Strategy: TBD
-  **** Currently we are using `All Branches` but that was just a guess, we need to do some expirmentation to figure out what the right setting here is.
-  **** currently with all branches we get duplicate pipelines for both the branch and PR for branch, need to try and get it down so that there isn't duplication and decide what the default opinion is
-  **** thinking that maybe `Only branches thgat are also files as PRs` may make snese but then you run into problem that you can't create a PR for a branch that is the same as the branch (`main`) you are merging into, so then you get a chicken/egg problem of getting a dev environment when you first branch
-  ** Discover pull requests from origion
-  *** Strategy: `The current pull reuqest revision`
-  ** Discover pull requests from forks
-  *** Strategy: `The current pull reuqest revision`
-  ** Add
+  * Projects
+  ** Gitea Organization
+  *** Server: Select the name that was created in the `Connect Jenkins to Gitea` step
+  *** Credentials: Add then select
+  **** Domain: whatever
+  **** Kind: Gitea Personal Access Token
+  **** Token: ${GITEA_JENKINS_SA_TOKEN}
+  ***** from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
+  **** ID: ${GITEA_SA_NAME}
+  ***** from step `Create a Service Account in Gitea for Jenkins to use to access the Organization`
+  *** Owner: ${GITEA_ORG_NAME}
+  **** this needs to match the org name in gitea that the service account was given access to that you want to scan projects of
+  *** Behaviors
+  **** Discovery Branches
+  ***** Strategy: `Only branches that are not also filed as PRs`
+  **** Discover pull requests from origion
+  ***** Strategy: `The current pull reuqest revision`
+  **** Discover pull requests from forks
+  ***** Strategy: `The current pull reuqest revision`
+  **** Add
   *** `Check out to matching local branch`
-  * Project Recognizers
-  ** Pipeline Jenkinsfile
-  *** Script Path: `cicd/Jenkins/Jenkinsfile`
-  **** NOTE: this is what the TSSC integration reference prjoejcts currently use, update to be wherever your apps store Jenkinsfiles
+  *** `Within Repositories` - `Filter by name (with regular expression`
+  **** Regular expression: `main|PR-\d`
+  ***** NOTE: if setting up for TSSC integration testing use `main|release/.*|PR-\d` so that release integration testing branches will be detected
+  ** Project Recognizers
+  *** Pipeline Jenkinsfile
+  **** Script Path: `cicd/Jenkinsfile`
+  ***** NOTE: this is what the TSSC integration reference projects currently use, update to be wherever your apps store Jenkinsfiles
+  * Automatic branch project triggering
+  ** Branch names to build automatically: `main|release/.*|PR-\d`
   * Save
 
 ===== Created Jenkins Crednetial with SOPS decryption information
