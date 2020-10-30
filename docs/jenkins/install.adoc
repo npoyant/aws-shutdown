@@ -168,14 +168,14 @@ TBD
   **** Add
   *** `Check out to matching local branch`
   *** `Within Repositories` - `Filter by name (with regular expression`
-  **** Regular expression: `^main$|^PR-\d+$`
-  ***** NOTE: if setting up for TSSC integration testing use `main|release/.*|PR-\d` so that release integration testing branches will be detected
+  **** Regular expression: `\^main$|^PR-\d+$`
+  ***** NOTE: if setting up for TSSC integration testing use `\^main$|^PR-\d+$|^release/.+$` so that release integration testing branches will be detected
   ** Project Recognizers
   *** Pipeline Jenkinsfile
   **** Script Path: `cicd/Jenkinsfile`
   ***** NOTE: this is what the TSSC integration reference projects currently use, update to be wherever your apps store Jenkinsfiles
   * Automatic branch project triggering
-  ** Branch names to build automatically: `main|release/.*|PR-\d`
+  ** Branch names to build automatically: `\^main$|^PR-\d+$|^release/.+$`
   * Save
 
 ===== Created Jenkins Crednetial with SOPS decryption information
