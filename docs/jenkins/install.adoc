@@ -168,7 +168,7 @@ TBD
   **** Add
   *** `Check out to matching local branch`
   *** `Within Repositories` - `Filter by name (with regular expression`
-  **** Regular expression: `main|PR-\d`
+  **** Regular expression: `^main$|^PR-\d+$`
   ***** NOTE: if setting up for TSSC integration testing use `main|release/.*|PR-\d` so that release integration testing branches will be detected
   ** Project Recognizers
   *** Pipeline Jenkinsfile
