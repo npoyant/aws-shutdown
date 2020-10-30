@@ -37,6 +37,8 @@ This folder is to host any deployment and/or configurations that were put into p
 
 === Update Gitea Config
 
+==== Enable SSH
+
 1. edit the gitea config map with the new FQDN
    1. `oc edit configmap gitea-config -n gitea`
    2. update the following parameters
@@ -46,3 +48,24 @@ This folder is to host any deployment and/or configurations that were put into p
    3. save
 2. re-deploy gitea to pick up the configmap change
    * `oc rollout latest gitea -n gitea`
+
+==== Persist SSH
+Need to add a PVC/PV for the /home/gitea/data dir because that is where the SSH identiy for gitea is stored and iwthout it, every time gitea reboots/pod moves/etc the dientity changes messing up the known_hosts files for clients of gitea.
+
+1. create a PVC
+   - name: `gitea-data`
+   - size: `Gi
+2. Update the `gitea` DeploymentConfig
+  1. add a `volumes`
+[source,yaml]
+----
+    - name: gitea-data
+      persistentVolumeClaim:
+        claimName: gitea-data
+----
+  2. add `volumeMounts` 
+[source,yaml]
+----
+        - name: gitea-data
+          mountPath: /home/gitea/data
+----
