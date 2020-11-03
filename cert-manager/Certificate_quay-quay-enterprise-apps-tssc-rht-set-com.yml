@@ -1,0 +1,26 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: quay-apps-tssc-rht-set-com
+spec:
+  secretName: quay-certificate
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+    - tssc
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+  - quay.apps.tssc.rht-set.com
+  - quay-quay-enterprise.apps.tssc.rht-set.com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
