@@ -71,3 +71,27 @@ So far two certifictes are being managed by cert-manager
 oc apply -f Certificate_wildcard_apps-tssc-rht-set-com.yml -n openshift-ingress
 oc apply -f Certificate_quay-quay-enterprise-apps-tssc-rht-set-com.yml -n quay-enterprise
 ```
+
+## un-install
+
+### cert-manager
+```bash
+oc delete project cert-mangaer
+```
+
+### aws config
+```bash
+AWS_CERT_MANAGER_POLICY_NAME=ocp-cert-manager
+AWS_CERT_MANAGER_GROUP_NAME=ocp-cert-manager
+AWS_CERT_MANAGER_USERNAME=ocp-tssc-infra-cert-manager
+AWS_CERT_MANAGER_ACCESS_KEY_ID=<TODO>
+
+aws iam remove-user-from-group --user-name  ${AWS_CERT_MANAGER_USERNAME} --group-name ${AWS_CERT_MANAGER_GROUP_NAME} --profile tssc-infra
+aws iam delete-access-key --user-name ${AWS_CERT_MANAGER_USERNAME} --access-key-id=${AWS_CERT_MANAGER_ACCESS_KEY_ID} --profile tssc-infra
+aws iam delete-user --user-name ${AWS_CERT_MANAGER_USERNAME}  --profile tssc-infra
+aws iam detach-group-policy --policy-arn ${LE_POLICY_ARN} --group-name letsencrypt-wildcard --profile tssc-infra
+aws iam delete-group --group-name letsencrypt-wildcard --profile tssc-infra
+aws iam delete-policy --policy-arn ${LE_POLICY_ARN} --profile tssc-infra
+oc delete secret aws-route53-creds-${AWS_CERT_MANAGER_USERNAME} -n cert-manager
+
+```
