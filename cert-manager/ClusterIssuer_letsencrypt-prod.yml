@@ -11,6 +11,14 @@ spec:
       name: letsencrypt-prod
     server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
-    - http01:
-        ingress:
-          class: nginx
+    - selector:
+        dnsZones:
+          - "rht-set.com"
+      dns01:
+        route53:
+          region: us-west-2
+          accessKeyID: AKIAQY43FAYYF22M5SEJ
+          hostedZoneID: Z0225062KQFBU1V5V7WV
+          secretAccessKeySecretRef:
+            name: aws-route53-creds-ocp-tssc-infra-cert-manager
+            key: ocp-infra-cert-manager-aws-secret-access-key.txt.dec

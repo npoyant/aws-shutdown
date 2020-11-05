@@ -2,10 +2,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: quay-apps-tssc-rht-set-com
-  namespace: quay-enterprise
+  name: wildcard-apps-tssc-rht-set-com
+  namespace: openshift-ingress
 spec:
-  secretName: quay-certificate
+  secretName: router-certs
   duration: 2160h
   renewBefore: 360h
   subject:
@@ -20,9 +20,7 @@ spec:
     - server auth
     - client auth
   dnsNames:
-  - quay.apps.tssc.rht-set.com
-  - quay-quay-enterprise.apps.tssc.rht-set.com
-  - quay-config.apps.tssc.rht-set.com
+  - '*.apps.tssc.rht-set.com'
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
