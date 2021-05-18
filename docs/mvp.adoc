@@ -1,30 +1,18 @@
 //ifdef::env-github[]
 :imagesdir: ../images
-:ProjectName: Trusted{nbsp}Software{nbsp}Supply{nbsp}Chain{nbsp}Infrastructure
-:ProjectShortName: TSSC Infrastructure
+:ProjectName: AWS{nbsp}Shutdown{nbsp}
+:ProjectShortName: AWS Shutdown
 //endif::[]
 
 = {ProjectName} ({ProjectShortName})
 
-{ProjectName} ({ProjectShortName}) defines how the TSSC infra gets deployed. In the begining this will just be hand jammed runbook style information and configuration files but as TISC starts to have outputs then this project will become the configuraiton which feeds into the TISC automation.
+{ProjectName} ({ProjectShortName}) Process to stop and start AWS instances on a schedule.
 
 == Installation & Configuration Guides
 // If we ever choose to publish this via asciidoctor, change the links below to includes, e.g.
-// include::artifactory/install.adoc[leveloffset=+2]
-// include::tekton/install.adoc[leveloffset=+2]
 // include::aws/configure-lambda-start-stop-ec2.adoc[leveloffset=+2]
 
-* link:docs/argocd/README.adoc[Argocd]
-* link:docs/artifactory/README.adoc[Artifactory]
 * link:docs/aws/README.adoc[AWS]
-* link:docs/gitea/README.adoc[Gitea]
-* link:docs/idm/README.adoc[IdM]
-* link:docs/keycloak/README.adoc[Keycloak]
-* link:docs/jenkins/README.adoc[Jenkins]
-* link:docs/sonarqube/README.adoc[Sonarqube]
-* link:docs/tekton/README.adoc[Tekton]
-* link:docs/gitea_jenkins_integration/README.adoc[Gitea integration with Jenkins]
-* link:docs/gitea_tekton_integration_info/README.adoc[Gitea integration with Tekton - Informational]
 
 == Development Practices
 

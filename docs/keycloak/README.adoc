@@ -1,7 +1,0 @@
-= Keycloak How To's
-
-This folder is to host any installation or configurations that were put into place to support the keycloak effort.
-
-* link:deploy-keycloak.adoc[Keycloak Deployment]
-* link:idm-integration.adoc[Keycloak+IdM Integration]
-* link:keycloak-ocp-ldap-group-sync.adoc[Keycloak and OpenShift Integration for Group Syncing (IdM User Federation)]

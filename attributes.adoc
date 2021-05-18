@@ -5,7 +5,7 @@
 :sectanchors:
 :sectlinks:
 
-:ProjectName: Trusted{nbsp}Software{nbsp}Supply{nbsp}Chain{nbsp}Infrastructure
-:ProjectShortName: TSSC Infrastructure
-:ProjectNameID: tssc_infra
+:ProjectName: AWS Shutdown
+:ProjectShortName: AWS Shutdown
+:ProjectNameID: aws_shutdown
 :ProjectVersion: 1.0
