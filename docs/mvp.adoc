@@ -4,16 +4,11 @@
 :ProjectShortName: AWS Shutdown
 //endif::[]
 
-= {ProjectName} ({ProjectShortName})
+= {ProjectName} 
 
-{ProjectName} ({ProjectShortName}) Process to stop and start AWS instances on a schedule.
+Process to stop and start AWS instances on a schedule.
 
 == Installation & Configuration Guides
-// If we ever choose to publish this via asciidoctor, change the links below to includes, e.g.
-// include::aws/configure-lambda-start-stop-ec2.adoc[leveloffset=+2]
 
 * link:docs/aws/README.adoc[AWS]
 
-== Development Practices
-
-* link:docs/dev_guide/rhpds.adoc[Red Hat Product Demo System (RHPDS)]
